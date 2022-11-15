@@ -1,15 +1,14 @@
-version: '3'
+version: '3.7'
 services:
-###> doctrine/doctrine-bundle ###
+  # Configure the database
   database:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: news_parser
-      MYSQL_USER: symfony
-      MYSQL_PASSWORD: symfony
-    
+            - MYSQL_ROOT_PASSWORD=somerootpass
+            - MYSQL_PASSWORD=somepass
+            - MYSQL_DATABASE=dockerizeme_db
+            - MYSQL_USER=someuser
   web:
-    build: .
-    ports:
-          - 8080:80
+        build: .
+        ports:
+            - 8080:80
