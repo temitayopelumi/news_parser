@@ -1,4 +1,6 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
+
+
  
 RUN a2enmod rewrite
  
@@ -13,8 +15,13 @@ RUN wget https://getcomposer.org/download/2.0.9/composer.phar \
     && mv composer.phar /usr/bin/composer && chmod +x /usr/bin/composer
  
 COPY docker/apache.conf /etc/apache2/sites-enabled/000-default.conf
-COPY . /var/www
+COPY docker/entrypoint.sh /entrypoint.sh
+COPY . .
  
 WORKDIR /var/www
- 
+
+
+RUN chmod +x /entrypoint.sh
+
 CMD ["apache2-foreground"]
+ENTRYPOINT ["/entrypoint.sh"]
